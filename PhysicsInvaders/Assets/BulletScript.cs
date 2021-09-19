@@ -48,6 +48,16 @@ public class BulletScript : MonoBehaviour
             //Destroy this bullet which collided with the Alien
             Destroy(gameObject);
         }
+        else if (collider.CompareTag("UFOShip"))
+        {
+            UFOScript ufo = collider.gameObject.GetComponent<UFOScript>();
+
+            //let the other object handle it's own death
+            ufo.Die();
+
+            //Destroy this bullet which collided with the Alien
+            Destroy(gameObject);
+        }
         else if (collider.CompareTag("AlienBullet"))
         {
             AlienBulletScript bullet= collider.gameObject.GetComponent<AlienBulletScript>();

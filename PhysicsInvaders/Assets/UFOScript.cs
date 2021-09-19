@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlienScript : MonoBehaviour
+public class UFOScript : MonoBehaviour
 {
 
     public Vector3 forceVector;
@@ -20,11 +20,11 @@ public class AlienScript : MonoBehaviour
     {
 
         haveBeenHit = false;
-        pointValue = 10;
-        timer = 300;
+        pointValue = 100;
+        timer = 50;
         bulletTimer = 0.0f;
 
-        forceVector.x = 1.0f;
+        forceVector.x = 50.0f;
 
     }
 
@@ -41,9 +41,9 @@ public class AlienScript : MonoBehaviour
         {
             timer++;
 
-            currVec = ((float)Math.Sin((float)(timer) / 200.0)) * forceVector;
+            currVec = ((float)Math.Sin((float)(timer) / 150.0)) * forceVector;
 
-            float probabilityBound = 9999.0f - bulletTimer;
+            float probabilityBound = 9900.0f - bulletTimer;
 
             if (UnityEngine.Random.Range(0.0f, 10000.0f) > probabilityBound)
             {

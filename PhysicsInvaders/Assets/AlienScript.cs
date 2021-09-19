@@ -45,7 +45,7 @@ public class AlienScript : MonoBehaviour
 
             float probabilityBound = 9999.0f - bulletTimer;
 
-            if (UnityEngine.Random.Range(0.0f, 1000.0f) > probabilityBound)
+            if (UnityEngine.Random.Range(0.0f, 10000.0f) > probabilityBound)
             {
                 Vector3 spawnPos = gameObject.transform.position;
                 spawnPos.y -= 1.0f;
@@ -81,25 +81,29 @@ public class AlienScript : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("Dying");
-
-        haveBeenHit = true;
-
-        GetComponent<Rigidbody>().useGravity = true;
-
-        AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
-
-        Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
-
         GameObject obj = GameObject.Find("GlobalObject");
         Global g = obj.GetComponent<Global>();
-        g.score += pointValue;
 
-        PlayerPrefs.SetInt("score", g.score);
+        if (!haveBeenHit)
+        {
+            Debug.Log("Dying");
 
+            GetComponent<Rigidbody>().useGravity = true;
 
-        // Destroy removes the gameObject from the scene and marks it for garbage collection
-        //Destroy(gameObject);
+            AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
+
+            Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
+
+            g.score += pointValue;
+
+            PlayerPrefs.SetInt("score", g.score);
+
+        
+            // Destroy removes the gameObject from the scene and marks it for garbage collection
+            //Destroy(gameObject);
+
+            haveBeenHit = true;
+        }
 
         if (g.score > 540)
         {

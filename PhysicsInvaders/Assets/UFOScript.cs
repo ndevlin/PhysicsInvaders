@@ -43,7 +43,7 @@ public class UFOScript : MonoBehaviour
 
             currVec = ((float)Math.Sin((float)(timer) / 150.0)) * forceVector;
 
-            float probabilityBound = 9900.0f - bulletTimer;
+            float probabilityBound = 9950.0f - bulletTimer;
 
             if (UnityEngine.Random.Range(0.0f, 10000.0f) > probabilityBound)
             {
@@ -98,11 +98,17 @@ public class UFOScript : MonoBehaviour
 
             PlayerPrefs.SetInt("score", g.score);
 
+            g.bonusActivated = true;
+
         
             // Destroy removes the gameObject from the scene and marks it for garbage collection
             //Destroy(gameObject);
 
             haveBeenHit = true;
+
+            //Destroy this bullet which collided with the Ship
+            Destroy(gameObject);
+
         }
 
         if (g.score > 640)

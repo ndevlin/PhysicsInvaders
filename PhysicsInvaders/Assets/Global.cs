@@ -10,6 +10,10 @@ public class Global : MonoBehaviour
     public Camera firstPersonCamera;
     public Camera overheadCamera;
 
+    public bool bonusActivated;
+
+    public float bonusTimer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +22,9 @@ public class Global : MonoBehaviour
         originInScreenCoords = Camera.main.WorldToScreenPoint(new Vector3(0, 0, 0));
         firstPersonCamera.enabled = false;
         overheadCamera.enabled = true;
+
+        bonusActivated = false;
+        bonusTimer = 0.0f;
     }
 
 
@@ -34,6 +41,15 @@ public class Global : MonoBehaviour
             SwitchView();
         }
     }
+
+    void FixedUpdate()
+    {
+        if(bonusActivated)
+        {
+            bonusTimer += 1.0f;
+        }
+    }
+
 
     // Call this function to disable FPS camera,
     // and enable overhead camera.

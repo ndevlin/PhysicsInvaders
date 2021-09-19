@@ -66,27 +66,64 @@ public class Ship : MonoBehaviour
     // Update is called once per frame 
     void Update ()
     {
-        if((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && timer > lastFire + 20.0f)
+        GameObject obj = GameObject.Find("GlobalObject");
+        Global g = obj.GetComponent<Global>();
+
+        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)))
         {
-            lastFire = timer;
 
-            Debug.Log("Fire! " + rotation);
+            if (!g.bonusActivated)
+            {
+                if (timer > lastFire + 20.0f)
+                {
+                    lastFire = timer;
 
-            // We don't want to spawn a bullet inside our ship, so some
-            // simple trigonometry is done here to spawn the bullet at the
-            // tip of where the ship is pointed
-            Vector3 spawnPos = gameObject.transform.position;
-            spawnPos.y += 1.5f;
+                    Debug.Log("Fire! " + rotation);
 
-            //instatiate the bullet
-            GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
+                    // We don't want to spawn a bullet inside our ship, so some
+                    // simple trigonometry is done here to spawn the bullet at the
+                    // tip of where the ship is pointed
+                    Vector3 spawnPos = gameObject.transform.position;
+                    spawnPos.y += 1.5f;
 
-            // get the Bullet Script Component of the new Bullet instance
-            BulletScript b = obj.GetComponent<BulletScript>();
+                    //instatiate the bullet
+                    GameObject bul = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
 
-            // set the direction the Bullet will travel in
-            Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
-            b.heading = rot;
+                    // get the Bullet Script Component of the new Bullet instance
+                    BulletScript b = bul.GetComponent<BulletScript>();
+
+                    // set the direction the Bullet will travel in
+                    Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
+                    b.heading = rot;
+                }
+            }
+            else
+            {
+                if (g.bonusTimer < 500.0f)
+                {
+                    Debug.Log("Fire! " + rotation);
+
+                    // We don't want to spawn a bullet inside our ship, so some
+                    // simple trigonometry is done here to spawn the bullet at the
+                    // tip of where the ship is pointed
+                    Vector3 spawnPos = gameObject.transform.position;
+                    spawnPos.y += 1.5f;
+
+                    //instatiate the bullet
+                    GameObject bul = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
+
+                    // get the Bullet Script Component of the new Bullet instance
+                    BulletScript b = bul.GetComponent<BulletScript>();
+
+                    // set the direction the Bullet will travel in
+                    Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
+                    b.heading = rot;
+                }
+                else
+                {
+                    g.bonusActivated = false;
+                }
+            }
         }
     }
 

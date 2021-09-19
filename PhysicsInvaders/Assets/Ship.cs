@@ -35,7 +35,7 @@ public class Ship : MonoBehaviour
         timer += 1.0f;
 
         // Vector3 default initializes all components to 0.0f     
-        forceVector.z = 3000000.0f;
+        forceVector.z = 100.0f;
 
         // force thruster     
         if (Input.GetAxisRaw("Horizontal") < 0)

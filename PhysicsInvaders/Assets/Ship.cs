@@ -76,8 +76,7 @@ public class Ship : MonoBehaviour
             // simple trigonometry is done here to spawn the bullet at the
             // tip of where the ship is pointed
             Vector3 spawnPos = gameObject.transform.position;
-            spawnPos.x += 1.5f * Mathf.Cos(rotation * Mathf.PI / 180);
-            spawnPos.z -= 1.5f * Mathf.Sin(rotation * Mathf.PI / 180);
+            spawnPos.y += 1.5f;
 
             //instatiate the bullet
             GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;

@@ -11,7 +11,7 @@ public class AlienBulletScript : MonoBehaviour
     void Start()
     {
         // travel straight in the X-axis         
-        thrust.x = 1000.0f;
+        thrust.y = -1000.0f;
 
         // do not passively decelerate         
         GetComponent<Rigidbody>().drag = 0;

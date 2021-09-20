@@ -106,9 +106,6 @@ public class UFOScript : MonoBehaviour
 
             haveBeenHit = true;
 
-            //Destroy this bullet which collided with the Ship
-            Destroy(gameObject);
-
         }
 
         if (g.score > 640)

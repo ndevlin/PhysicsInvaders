@@ -17,6 +17,8 @@ public class Ship : MonoBehaviour
     public bool thrustPressed;
     public bool rotatePressed;
 
+    public Vector3 localScale;
+
     // Use this for initialization 
     void Start()
     {
@@ -26,6 +28,8 @@ public class Ship : MonoBehaviour
 
         timer = 0.0f;
         lastFire = 0.0f;
+
+        localScale = gameObject.transform.localScale;
     }
 
     /* forced changes to rigid body physics parameters should be done through the FixedUpdate() 
@@ -68,6 +72,18 @@ public class Ship : MonoBehaviour
     {
         GameObject obj = GameObject.Find("GlobalObject");
         Global g = obj.GetComponent<Global>();
+
+        if (g.bonusActivated)
+        {
+            if (g.bonusTimer < 500.0f && (int)(g.bonusTimer / 10.0f) % 2 == 0)
+            {
+                gameObject.transform.localScale = localScale * 0.5f;
+            }
+            else
+            {
+                gameObject.transform.localScale = localScale;
+            }
+        }
 
         if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)))
         {

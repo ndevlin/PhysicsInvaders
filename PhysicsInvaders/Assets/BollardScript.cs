@@ -22,7 +22,9 @@ public class BollardScript : MonoBehaviour
         // object we're interested in
 
         Collider collider = collision.collider;
-        
+
+        float probabilityBound = 9.0f;
+
         if (collider.CompareTag("Bullet"))
         {
             BulletScript bullet = collider.gameObject.GetComponent<BulletScript>();
@@ -30,8 +32,12 @@ public class BollardScript : MonoBehaviour
             //let the other object handle it's own death
             bullet.Die();
 
-            //Destroy this bullet which collided with the Alien
-            Destroy(gameObject);
+            //Destroy this bollard which collided with the Bullet
+
+            if (UnityEngine.Random.Range(0.0f, 10.0f) > probabilityBound)
+            {
+                Destroy(gameObject);
+            }
         }
         else if (collider.CompareTag("AlienBullet"))
         {
@@ -40,8 +46,10 @@ public class BollardScript : MonoBehaviour
             //let the other object handle it's own death
             bullet.Die();
 
-            //Destroy this bullet which collided with the Alien
-            Destroy(gameObject);
+            if (UnityEngine.Random.Range(0.0f, 10.0f) > probabilityBound)
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {

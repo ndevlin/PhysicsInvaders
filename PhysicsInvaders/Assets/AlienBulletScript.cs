@@ -42,12 +42,12 @@ public class AlienBulletScript : MonoBehaviour
         if(collider.CompareTag("Ship"))
         {
             Ship ship = collider.gameObject.GetComponent<Ship>();
+            
+            //Destroy this bullet which collided with the Ship
+            Destroy(gameObject);
 
             //let the other object handle it's own death
             ship.Die();
-
-            //Destroy this bullet which collided with the Ship
-            Destroy(gameObject);
         }
         else if (collider.CompareTag("Bullet"))
         {

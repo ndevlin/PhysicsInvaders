@@ -23,11 +23,14 @@ public class Ship : MonoBehaviour
 
     public Vector3 localScale;
 
-    public int lives;
+    Global g;
 
     // Use this for initialization 
     void Start()
     {
+        GameObject globalObject = GameObject.Find("GlobalObject");
+        g = globalObject.GetComponent<Global>();
+
         rotation = -90.0f;
         thrust = 0;
         thrustPressed = false;
@@ -40,8 +43,6 @@ public class Ship : MonoBehaviour
         lastFire = 0.0f;
 
         localScale = gameObject.transform.localScale;
-
-        lives = 3;
     }
 
     /* forced changes to rigid body physics parameters should be done through the FixedUpdate() 
@@ -97,22 +98,24 @@ public class Ship : MonoBehaviour
     // Update is called once per frame 
     void Update ()
     {
-        GameObject obj = GameObject.Find("GlobalObject");
-        Global g = obj.GetComponent<Global>();
-
         if (g.bonusActivated)
         {
             Flash(g.bonusTimer, 500.0f);
+            flashing = true;
         }
 
         if(flashing)
         {
             Flash(newLifeTimer, 200.0f);
 
-            if(newLifeTimer > 200.0f)
+            if(newLifeTimer > 100.0f)
             {
                 flashing = false;
             }
+        }
+        else
+        {
+            gameObject.transform.localScale = localScale;
         }
 
         if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)))
@@ -120,6 +123,8 @@ public class Ship : MonoBehaviour
 
             if (!g.bonusActivated)
             {
+                gameObject.transform.localScale = localScale;
+
                 if (shootingTimer > lastFire + 20.0f)
                 {
                     lastFire = shootingTimer;
@@ -185,12 +190,14 @@ public class Ship : MonoBehaviour
 
         Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
 
-        lives--;
+        if(flashing == false)
+        {
+            g.lives--;
+            newLifeTimer = 0.0f;
+            flashing = true;
+        }
 
-        newLifeTimer = 0.0f;
-        flashing = true;
-
-        if(lives < 1)
+        if (g.lives < 1)
         {
             // Destroy removes the gameObject from the scene and marks it for garbage collection
             Destroy(gameObject);

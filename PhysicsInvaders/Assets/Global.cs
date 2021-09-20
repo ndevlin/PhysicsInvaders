@@ -7,12 +7,16 @@ public class Global : MonoBehaviour
     public Vector3 originInScreenCoords;
     public int score;
 
+    public int lives;
+
+
     public Camera firstPersonCamera;
     public Camera overheadCamera;
 
     public bool bonusActivated;
 
     public float bonusTimer;
+
 
 
     // Start is called before the first frame update
@@ -25,6 +29,9 @@ public class Global : MonoBehaviour
 
         bonusActivated = false;
         bonusTimer = 0.0f;
+
+        lives = 3;
+
     }
 
 
@@ -68,3 +75,4 @@ public class Global : MonoBehaviour
     }
 
 }
+

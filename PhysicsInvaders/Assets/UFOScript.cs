@@ -24,7 +24,7 @@ public class UFOScript : MonoBehaviour
         timer = 50;
         bulletTimer = 0.0f;
 
-        forceVector.x = 100.0f;
+        forceVector.x = 50.0f;
 
     }
 

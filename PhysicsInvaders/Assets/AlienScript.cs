@@ -24,7 +24,7 @@ public class AlienScript : MonoBehaviour
         timer = 300;
         bulletTimer = 0.0f;
 
-        forceVector.x = 1.0f;
+        forceVector.x = 2.0f;
 
     }
 
@@ -43,7 +43,7 @@ public class AlienScript : MonoBehaviour
 
             currVec = ((float)Math.Sin((float)(timer) / 200.0)) * forceVector;
 
-            float probabilityBound = 9999.0f - bulletTimer;
+            float probabilityBound = 9990.0f - bulletTimer;
 
             if (UnityEngine.Random.Range(0.0f, 10000.0f) > probabilityBound)
             {

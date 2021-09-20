@@ -7,7 +7,11 @@ public class Ship : MonoBehaviour
     public Vector3 forceVector;
     public float rotationSpeed;
     public float rotation;
-    public float timer;
+    public float shootingTimer;
+
+    public float newLifeTimer;
+
+    public bool flashing;
 
     public float lastFire;
 
@@ -19,6 +23,8 @@ public class Ship : MonoBehaviour
 
     public Vector3 localScale;
 
+    public int lives;
+
     // Use this for initialization 
     void Start()
     {
@@ -26,17 +32,25 @@ public class Ship : MonoBehaviour
         thrust = 0;
         thrustPressed = false;
 
-        timer = 0.0f;
+        newLifeTimer = 0.0f;
+
+        flashing = false;
+
+        shootingTimer = 0.0f;
         lastFire = 0.0f;
 
         localScale = gameObject.transform.localScale;
+
+        lives = 3;
     }
 
     /* forced changes to rigid body physics parameters should be done through the FixedUpdate() 
     method, not the Update() method*/
     void FixedUpdate()
     {
-        timer += 1.0f;
+        shootingTimer += 1.0f;
+
+        newLifeTimer += 1.0f;
 
         // Vector3 default initializes all components to 0.0f     
         forceVector.z = 100.0f;
@@ -65,6 +79,19 @@ public class Ship : MonoBehaviour
     }
 
 
+    void Flash(float timerCurr, float timerEnd)
+    {
+        if (timerCurr < timerEnd && (int)(timerCurr / 10.0f) % 2 == 0)
+        {
+            gameObject.transform.localScale = localScale * 0.5f;
+        }
+        else
+        {
+            gameObject.transform.localScale = localScale;
+        }
+    }
+
+
     public GameObject bullet; // the GameObject to spawn
 
     // Update is called once per frame 
@@ -75,13 +102,16 @@ public class Ship : MonoBehaviour
 
         if (g.bonusActivated)
         {
-            if (g.bonusTimer < 500.0f && (int)(g.bonusTimer / 10.0f) % 2 == 0)
+            Flash(g.bonusTimer, 500.0f);
+        }
+
+        if(flashing)
+        {
+            Flash(newLifeTimer, 200.0f);
+
+            if(newLifeTimer > 200.0f)
             {
-                gameObject.transform.localScale = localScale * 0.5f;
-            }
-            else
-            {
-                gameObject.transform.localScale = localScale;
+                flashing = false;
             }
         }
 
@@ -90,9 +120,9 @@ public class Ship : MonoBehaviour
 
             if (!g.bonusActivated)
             {
-                if (timer > lastFire + 20.0f)
+                if (shootingTimer > lastFire + 20.0f)
                 {
-                    lastFire = timer;
+                    lastFire = shootingTimer;
 
                     Debug.Log("Fire! " + rotation);
 
@@ -155,12 +185,19 @@ public class Ship : MonoBehaviour
 
         Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
 
-        // Destroy removes the gameObject from the scene and marks it for garbage collection
-        Destroy(gameObject);
+        lives--;
 
-        Application.LoadLevel("GameOver");
+        newLifeTimer = 0.0f;
+        flashing = true;
+
+        if(lives < 1)
+        {
+            // Destroy removes the gameObject from the scene and marks it for garbage collection
+            Destroy(gameObject);
+
+            Application.LoadLevel("GameOver");
+        }
     }
-
 
 }
 

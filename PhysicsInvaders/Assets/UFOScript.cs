@@ -24,7 +24,7 @@ public class UFOScript : MonoBehaviour
         timer = 50;
         bulletTimer = 0.0f;
 
-        forceVector.x = 50.0f;
+        forceVector.x = 100.0f;
 
     }
 
@@ -43,7 +43,7 @@ public class UFOScript : MonoBehaviour
 
             currVec = ((float)Math.Sin((float)(timer) / 150.0)) * forceVector;
 
-            float probabilityBound = 9950.0f - bulletTimer;
+            float probabilityBound = 9900.0f - bulletTimer;
 
             if (UnityEngine.Random.Range(0.0f, 10000.0f) > probabilityBound)
             {

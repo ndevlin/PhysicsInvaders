@@ -9,7 +9,9 @@ public class Ship : MonoBehaviour
     public float rotation;
     public float shootingTimer;
 
-    public float newLifeTimer;
+    public float flashingTimer;
+
+    public float flashingTimerEnd;
 
     public bool flashing;
 
@@ -35,7 +37,8 @@ public class Ship : MonoBehaviour
         thrust = 0;
         thrustPressed = false;
 
-        newLifeTimer = 0.0f;
+        flashingTimer = 0.0f;
+        flashingTimerEnd = 200.0f;
 
         flashing = false;
 
@@ -51,7 +54,10 @@ public class Ship : MonoBehaviour
     {
         shootingTimer += 1.0f;
 
-        newLifeTimer += 1.0f;
+        if (flashing)
+        {
+            flashingTimer += 1.0f;
+        }
 
         // Vector3 default initializes all components to 0.0f     
         forceVector.z = 100.0f;
@@ -80,15 +86,19 @@ public class Ship : MonoBehaviour
     }
 
 
-    void Flash(float timerCurr, float timerEnd)
+    void Flash()
     {
-        if (timerCurr < timerEnd && (int)(timerCurr / 10.0f) % 2 == 0)
+        gameObject.transform.localScale = localScale;
+        if (flashingTimer < flashingTimerEnd)
         {
-            gameObject.transform.localScale = localScale * 0.5f;
+            if ((int)(flashingTimer / 10.0f) % 2 == 0)
+            {
+                gameObject.transform.localScale = localScale * 0.5f;
+            }
         }
         else
         {
-            gameObject.transform.localScale = localScale;
+            flashing = false;
         }
     }
 
@@ -100,18 +110,13 @@ public class Ship : MonoBehaviour
     {
         if (g.bonusActivated)
         {
-            Flash(g.bonusTimer, 500.0f);
+            flashingTimerEnd = 500.0f;
             flashing = true;
         }
 
         if(flashing)
         {
-            Flash(newLifeTimer, 200.0f);
-
-            if(newLifeTimer > 100.0f)
-            {
-                flashing = false;
-            }
+            Flash();
         }
         else
         {
@@ -152,6 +157,8 @@ public class Ship : MonoBehaviour
             {
                 if (g.bonusTimer < 500.0f)
                 {
+                    flashing = true;
+
                     Debug.Log("Fire! " + rotation);
 
                     // We don't want to spawn a bullet inside our ship, so some
@@ -173,6 +180,7 @@ public class Ship : MonoBehaviour
                 else
                 {
                     g.bonusActivated = false;
+                    flashing = false;
                 }
             }
         }
@@ -193,7 +201,8 @@ public class Ship : MonoBehaviour
         if(flashing == false)
         {
             g.lives--;
-            newLifeTimer = 0.0f;
+            flashingTimer = 0.0f;
+            flashingTimerEnd = 200.0f;
             flashing = true;
         }
 

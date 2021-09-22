@@ -21,7 +21,7 @@ public class TitleScript : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(Screen.width / 2.2f, Screen.height / 2.2f, 200, 200), "SPACE INVADERS! ");
+        GUI.Label(new Rect(Screen.width / 2.2f, Screen.height / 2.2f, 200, 200), "PHYSICS INVADERS! ");
 
         GUILayout.BeginArea(new Rect(10, Screen.height / 2 + 100, Screen.width - 10, 200));
 

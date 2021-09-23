@@ -1,7 +1,12 @@
+
+// Written by Nathan Devlin
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Controls behavior of the UFO boss alien
 
 public class UFOScript : MonoBehaviour
 {
@@ -79,6 +84,8 @@ public class UFOScript : MonoBehaviour
 
     public AudioClip deathKnell;
 
+    // Upon death, create explosion effect, sound effect, increment score
+    // THe UFO also activates the super mode for the player
     public void Die()
     {
         GameObject obj = GameObject.Find("GlobalObject");

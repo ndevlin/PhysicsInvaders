@@ -1,6 +1,11 @@
+
+// Written by Nathan Devlin
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Global class to control elements that multiple objects may need to interact with
 
 public class Global : MonoBehaviour
 {
@@ -49,6 +54,7 @@ public class Global : MonoBehaviour
         }
     }
 
+    // Updates regurlarly regardless of framerate
     void FixedUpdate()
     {
         if(bonusActivated)

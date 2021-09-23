@@ -1,7 +1,12 @@
+
+// Written by Nathan Devlin
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+// Script to control the UI element displaying the number of lives remaining
 
 public class LifeUI : MonoBehaviour
 {

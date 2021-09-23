@@ -1,6 +1,11 @@
+
+// Written by Nathan Devlin
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Controls behavior of bollards, primarily their death
 
 public class BollardScript : MonoBehaviour
 {
@@ -15,15 +20,13 @@ public class BollardScript : MonoBehaviour
         //Physics engine handles movement, empty for now.      
     }
 
-    
+    // Behavior upon collision with another object
     void OnCollisionEnter(Collision collision)
     {
         // The collision contains a lot of info, but its the colliding
         // object we're interested in
 
         Collider collider = collision.collider;
-
-        float probabilityBound = 9.0f;
 
         if (collider.CompareTag("Bullet"))
         {
@@ -34,10 +37,7 @@ public class BollardScript : MonoBehaviour
 
             //Destroy this bollard which collided with the Bullet
 
-            if (UnityEngine.Random.Range(0.0f, 10.0f) > probabilityBound)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
         else if (collider.CompareTag("AlienBullet"))
         {
@@ -46,10 +46,7 @@ public class BollardScript : MonoBehaviour
             //let the other object handle it's own death
             bullet.Die();
 
-            if (UnityEngine.Random.Range(0.0f, 10.0f) > probabilityBound)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
         else
         {
@@ -59,6 +56,7 @@ public class BollardScript : MonoBehaviour
         }
     }
 
+    // Destroy the bollard
     public void Die()
     {
         Debug.Log("Dying");

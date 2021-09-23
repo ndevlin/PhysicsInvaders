@@ -1,6 +1,11 @@
+
+// Written by Nathan Devlin
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Controls speed and other paramaters of bullets shot by Aliens
 
 public class AlienBulletScript : MonoBehaviour
 {
@@ -30,12 +35,10 @@ public class AlienBulletScript : MonoBehaviour
         //Physics engine handles movement, empty for now.      
     }
 
-    
+    // Behavior upon collision with another object
     void OnCollisionEnter(Collision collision)
     {
-        // The collision contains a lot of info, but its the colliding
-        // object we're interested in
-
+        // Collidingobject we're interested in
         Collider collider = collision.collider;
         
 
@@ -66,7 +69,7 @@ public class AlienBulletScript : MonoBehaviour
             //let the other object handle it's own death
             bollard.Die();
 
-            //Destroy this bullet which collided with the Alien
+            //Destroy this bullet which collided with the bollard
             Destroy(gameObject);
         }
         else
@@ -77,6 +80,7 @@ public class AlienBulletScript : MonoBehaviour
         }
     }
 
+    // Destroy this bullet
     public void Die()
     {
         Debug.Log("Dying");

@@ -1,6 +1,11 @@
+
+// Written by Nathan Devlin
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Controls the player's ship
 
 public class Ship : MonoBehaviour
 {
@@ -85,7 +90,7 @@ public class Ship : MonoBehaviour
 
     }
 
-
+    // Cause the ship to shrink and expand to create a flashing effect
     void Flash()
     {
         gameObject.transform.localScale = localScale;
@@ -190,6 +195,7 @@ public class Ship : MonoBehaviour
 
     public AudioClip deathKnell;
 
+    // Decrement the number of lives; if no lives remain, end the game
     public void Die()
     {
         Debug.Log("Dying");
@@ -198,6 +204,7 @@ public class Ship : MonoBehaviour
 
         Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
 
+        // Flash and make the ship invincible for ~2 seconds
         if(flashing == false)
         {
             g.lives--;

@@ -1,6 +1,11 @@
+
+// Written by Nathan Devlin
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Controls speed and other paramaters of bullets shot by Player
 
 public class BulletScript : MonoBehaviour
 {
@@ -30,7 +35,7 @@ public class BulletScript : MonoBehaviour
         //Physics engine handles movement, empty for now.      
     }
 
-    
+    // Behavior upon collision with another object
     void OnCollisionEnter(Collision collision)
     {
         // The collision contains a lot of info, but its the colliding
@@ -86,6 +91,7 @@ public class BulletScript : MonoBehaviour
         }
     }
 
+    // Destroy this bullet
     public void Die()
     {
         Debug.Log("Dying");

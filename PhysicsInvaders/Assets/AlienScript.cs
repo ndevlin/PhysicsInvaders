@@ -1,7 +1,12 @@
+
+// Written by Nathan Devlin
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Determines Alien behavior including speed, movement, and bullet shooting
 
 public class AlienScript : MonoBehaviour
 {
@@ -79,6 +84,7 @@ public class AlienScript : MonoBehaviour
 
     public AudioClip deathKnell;
 
+    // Upon death, create explosion effect, sound effect, increment score
     public void Die()
     {
         GameObject obj = GameObject.Find("GlobalObject");
@@ -97,10 +103,6 @@ public class AlienScript : MonoBehaviour
             g.score += pointValue;
 
             PlayerPrefs.SetInt("score", g.score);
-
-        
-            // Destroy removes the gameObject from the scene and marks it for garbage collection
-            //Destroy(gameObject);
 
             haveBeenHit = true;
         }

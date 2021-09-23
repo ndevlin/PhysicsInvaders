@@ -1,6 +1,11 @@
+
+// Written by Nathan Devlin
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Controls behavior of the title screen
 
 public class TitleScript : MonoBehaviour
 {
@@ -19,6 +24,7 @@ public class TitleScript : MonoBehaviour
         
     }
 
+    // Controls the new game controls
     void OnGUI()
     {
         GUI.Label(new Rect(Screen.width / 2.2f, Screen.height / 2.2f, 200, 200), "PHYSICS INVADERS! ");

@@ -1,6 +1,11 @@
+
+// Written by Nathan Devlin
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Controls behavior of the GAME OVER screen
 
 public class GameOverScript : MonoBehaviour
 {
@@ -21,7 +26,7 @@ public class GameOverScript : MonoBehaviour
         
     }
 
-
+    // Controls the new game controls
     void OnGUI()
     {
         GUI.Label(new Rect(Screen.width / 2.2f, Screen.height / 3.0f, 200, 200), "GAME OVER! ");

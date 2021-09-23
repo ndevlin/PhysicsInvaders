@@ -1,8 +1,12 @@
+
+// Written by Nathan Devlin
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Script to control the UI element displaying the current score
 public class ScoreUI : MonoBehaviour
 {
     Global globalObj;

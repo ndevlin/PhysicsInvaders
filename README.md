@@ -12,6 +12,6 @@
 
  Shoot all of the aliens before losing your 3 lives to win!
 
- ![](images/PhysicsInvadersScreenShot.png)
+ ![](PhysicsInvadersScreenShot.png)
 
 

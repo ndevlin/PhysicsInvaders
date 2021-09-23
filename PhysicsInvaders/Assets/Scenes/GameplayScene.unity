@@ -3248,7 +3248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -850, y: 450}
+  m_AnchoredPosition: {x: -400, y: -200}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &958392875
@@ -6547,7 +6547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 850, y: 450}
+  m_AnchoredPosition: {x: 400, y: -200}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1856891212
@@ -7303,7 +7303,8 @@ MonoBehaviour:
   rotationSpeed: 0
   rotation: 0
   shootingTimer: 0
-  newLifeTimer: 0
+  flashingTimer: 0
+  flashingTimerEnd: 0
   flashing: 0
   lastFire: 0
   thrust: 0

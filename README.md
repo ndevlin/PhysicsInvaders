@@ -1,5 +1,11 @@
-# PhysicsInvadersRepo
- 
+# Physics Invaders README
+
+The best way to play is with an Android emulator! You can download PhysicsInvaders/Android_Build/AndroidPhysicsInvaders.apk
+
+Alternatively, download PhysicsInvaders/Build/PhysicsInvaders.exe
+
+Instructions:
+
  Press left and right arrows to move left and right
 
  Space bar to shoot bullets
